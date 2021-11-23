@@ -1,6 +1,10 @@
 #!/bin/bash
 
-cd ~/ansible/macbook-setup/mac/ || exit
+# Generate a Brewfile in the $WORKDIR
+
+WORKDIR=~/ansible/macbook-setup/mac/
+
+cd $WORKDIR || exit
 mv Brewfile Brewfile.BAK
 
 if brew bundle dump; then
