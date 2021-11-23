@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cd ~/ansible/macbook-setup/mac/ || exit
+mv Brewfile Brewfile.BAK
+
+if brew bundle dump; then
+    echo Success
+    rm Brewfile.BAK
+else
+    echo Error
+fi
+
+# git add Brewfile
+# git commit -m 'Updated Brewfile'
+# git push
+cd - > /dev/null || exit
