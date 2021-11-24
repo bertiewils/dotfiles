@@ -1,0 +1,52 @@
+#!/bin/bash
+#
+# Script to help template new files.
+# To be used with a remote repository
+# e.g. https://github.com/bertiewils/templates
+
+# Set colours
+NC='\033[0m'
+RED='\033[0;31m'
+
+TEMPLATE_LIST=https://raw.githubusercontent.com/bertiewils/templates/main/list
+TEMPLATE_LIST=$(curl -fsL "${TEMPLATE_LIST}" || error "Unable to contact remote repository")
+
+TEMPLATE_DIR=https://raw.githubusercontent.com/bertiewils/templates/main/templates/
+
+# Helpers
+error() {
+  printf "${RED}ERROR ${NC}- $*\n" >&2
+}
+
+usage() {
+  echo
+  echo "Template new files."
+  echo
+  echo "Usage: template LANGUAGE FILE"
+  echo
+  echo "e.g. template bash new-script.sh"
+  echo
+  echo "Language options:"
+  echo
+  echo "${TEMPLATE_LIST}"
+  echo
+}
+
+
+if [[ $# -ne 2 ]] ; then
+    usage
+    exit 0
+fi
+
+if echo "${TEMPLATE_LIST}" | grep -qE "^${1}$"; then
+  curl -fsSL --create-dirs "${TEMPLATE_DIR}/$1" --output "$2"
+else
+  echo
+  error "Invalid option"
+  echo
+  echo "Valid options:"
+  echo
+  echo "${TEMPLATE_LIST}"
+  echo
+  exit 1
+fi
