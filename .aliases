@@ -50,7 +50,7 @@ alias pmpBot=". ~/python/pmp/notes && ~/python/pmp/pmp.py"
 alias fmlBot=". ~/python/fml/notes && ~/python/fml/fmlBot.py"
 
 # MISC
-alias weather="curl wttr.in/London"
+alias weather="curl wttr.in/$(curl -s https://ipinfo.io/city)"
 cheat() { curl cheat.sh/$1; }
 alias fuck="sudo !!"
 alias pastebin='curl -F \"upfile=@-\" https://clitxt.com'
