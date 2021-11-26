@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#
+# When an alias just won't cut it
+
+# Display a search on https://wiki.archlinux.org
+archwiki () {
+  local term="${*}"
+  term="${term// /+}"
+  lynx "https://wiki.archlinux.org/index.php?search=${term}"
+}
+
+# Display cheatsheets using https://cheat.sh
+cheat () {
+  local term="${*}"
+  term="${term// /+}"
+  curl "cheat.sh/${term}"
+}
+
+# List files by size. Usage: dusort dir/*
+dusort () { du -sh "$@" | sort -sh; }
+
+# Generate a gitignore file using https://www.toptal.com/developers/gitignore
+generategitignore () {
+  local langs="${*}"
+  local tmpfile
+  tmpfile=$(mktemp /tmp/generategitignore.XXXXXX)
+  langs="${langs// /,}"
+  curl -sL "https://www.toptal.com/developers/gitignore/api/$langs" > "$tmpfile"
+  cp -i "$tmpfile" .gitignore
+  rm "$tmpfile"
+}
+
+# Create a dir and move into it
+mkcd () { mkdir "$1" && cd "$1" || exit; }
+
+# Open a dir in a new tab
+newtab () { open "$@" -a "iterm"; }
+
+# Upgrade to the latest version of Chromedriver
+upgradechromedriver () { 
+  wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/"$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)"/chromedriver_mac64.zip \
+    && unzip /tmp/chromedriver.zip chromedriver -d ~/bin \
+    && rm /tmp/chromedriver.zip
+}
