@@ -23,7 +23,7 @@ alias dc="cd ~/Documents"
 alias p="cd ~/Documents/projects"
 alias home="cd ~"
 alias ll="ls -lah"
-alias PATH='echo $PATH | tr -s ":" "\n"'
+alias PATH='echo -e ${PATH//:/\\n}'
 alias mkdir="mkdir -p"
 
 # GIT
@@ -44,6 +44,7 @@ alias dcupdate="docker-compose pull && docker-compose up -d"
 
 # PROGRAMS
 alias htop="bpytop"
+alias vscode="code"
 alias qrencode="qrencode -t ansiutf8"
 alias diff='colordiff -yW"$(tput cols)"'
 alias pmpBot=". ~/python/pmp/notes && ~/python/pmp/pmp.py"
