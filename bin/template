@@ -1,10 +1,10 @@
 #!/bin/bash
 #
-# Script to help template new files.
+# Script to template new files.
 # Also see $TEMPLATE_DIR
 
 # Set colours
-NC='\033[0m'
+NC='\033[0m'  # No colour
 RED='\033[0;31m'
 
 TEMPLATE_DIR=$HOME/templates
@@ -12,31 +12,39 @@ TEMPLATE_LIST=$(ls "$TEMPLATE_DIR")
 
 # Helpers
 error() {
+  echo
+  # shellcheck disable=SC2059  # for clarity instead of format specifiers
   printf "${RED}ERROR ${NC}- $*\n" >&2
 }
 
 usage() {
-  echo
-  echo "Usage: template LANGUAGE FILE"
-  echo
-  echo "e.g. template bash new-script.sh"
-  echo
-  echo "Language options:"
-  echo
-  echo "${TEMPLATE_LIST}"
-  echo
+  local script_name
+  script_name=$(basename "$0")
+  cat <<EOF
+
+Usage: $script_name [ language ] [ file ]
+
+e.g. $script_name bash new-script.sh
+
+Language options:
+
+${TEMPLATE_LIST}
+
+EOF
 }
 
+# Main ########################################################################
 
 if [[ $# -ne 2 ]] ; then
-    usage
-    exit 0
+  error "Provide 2 arguments"
+  usage
+  exit 2
 fi
 
 if echo "${TEMPLATE_LIST}" | grep -qE "^${1}$"; then
+  # -i to prompt if $2 already exists, prevents accidental overwrites
   cp -i "${TEMPLATE_DIR}/$1" "$2"
 else
-  echo
   error "Invalid option"
   usage
   exit 1
