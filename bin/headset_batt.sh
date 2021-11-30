@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-
-# Script to return a pretty battery status of the connected headset using https://github.com/Sapd/HeadsetControl
+#
+# Script to return a pretty battery status of the connected headset
+# using https://github.com/Sapd/HeadsetControl
+# To be used with e.g. https://extensions.gnome.org/extension/2932/executor/
 
 HEADSETCONTROL_BIN="/usr/local/bin/headsetcontrol"
 HEADSETCONTROL_BATT="-b"
