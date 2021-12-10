@@ -46,7 +46,7 @@ else
   EXISTING_FILES=$($ALIAS checkout 2>&1 | grep -P '\t' | awk '{ print $1 }')
   for file in $EXISTING_FILES; do
     mkdir -p "$BACKUP_DIR/$(dirname "$file")"
-    mv "$file" $BACKUP_DIR
+    mv "$file" "$BACKUP_DIR/$file"
     info "Backed up $file"
   done
   $ALIAS checkout && info "Checked out dotfiles"
