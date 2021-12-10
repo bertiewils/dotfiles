@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
 # Script to install my dotfiles
 # Inspired by https://www.atlassian.com/git/tutorials/dotfiles
@@ -32,9 +32,10 @@ if [ -d ~/.dotfiles ]; then
   exit 2
 fi
 
-/usr/bin/git clone --bare $REPO_URL "$HOME/.dotfiles"
 
 cd "$HOME" || exit 1
+
+/usr/bin/git clone --bare $REPO_URL "$HOME/.dotfiles"
 
 if $ALIAS checkout; then
   info "Checked out dotfiles"
@@ -53,7 +54,7 @@ fi
 
 $ALIAS config --local status.showUntrackedFiles no
 
-if ! alias $ALIAS &>/dev/null; then
+if ! alias $ALIAS > /dev/null 2>&1; then
   warn "Remember to add the alias permenantly (in .bashrc etc.)"
 fi
 
