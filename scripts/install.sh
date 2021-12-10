@@ -42,10 +42,12 @@ else
   info "Backing up pre-existing dot files";
   BACKUP_DIR=~/.dotfiles-backup
   mkdir -p $BACKUP_DIR
-  $ALIAS checkout 2>&1 \
-    | grep -P '\t' \
-    | awk '{ print $1 }' \
-    | xargs -I {} mv {} $BACKUP_DIR/{}
+  EXISTING_FILES=$($ALIAS checkout 2>&1 | grep -P '\t' | awk '{ print $1 }')
+  for file in $EXISTING_FILES; do
+    mkdir -p "$BACKUP_DIR/$(dirname "$file")"
+    mv "$file" $BACKUP_DIR
+    info "Backed up $file"
+  done
   $ALIAS checkout && info "Checked out dotfiles"
 fi
 
