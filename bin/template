@@ -43,7 +43,7 @@ fi
 
 if echo "${TEMPLATE_LIST}" | grep -qE "^${1}$"; then
   # -i to prompt if $2 already exists, prevents accidental overwrites
-  cp -i "${TEMPLATE_DIR}/$1" "$2"
+  /bin/cp -i "${TEMPLATE_DIR}/$1" "$2"
 else
   error "Invalid option"
   usage
