@@ -5,3 +5,5 @@
 	email = 19255166+bertiewils@users.noreply.github.com
 [color]
 	ui = auto
+[pull]
+	rebase = false
