@@ -43,12 +43,12 @@ alias dcrestart="docker-compose down && docker-compose up -d"
 alias dcupdate="docker-compose pull && docker-compose up -d"
 
 # PROGRAMS
+alias mv="mv -i"
 alias htop="bpytop"
 alias vscode="code"
 alias qrencode="qrencode -t ansiutf8"
 alias diff='colordiff -yW"$(tput cols)"'
-alias pmpBot=". ~/python/pmp/notes && ~/python/pmp/pmp.py"
-alias fmlBot=". ~/python/fml/notes && ~/python/fml/fmlBot.py"
+alias webserver="open 'http://localhost:8000'; python3 -m http.server"
 
 # MISC
 alias weather='curl wttr.in/$(curl -s https://ipinfo.io/city)'

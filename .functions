@@ -1,44 +1,56 @@
 #!/usr/bin/env bash
 #
 # When an alias just won't cut it
+# Functions are aliased so I can easily tell what they are
 
 # Display a search on https://wiki.archlinux.org
-archwiki () {
+_func_archwiki () {
   local term="${*}"
   term="${term// /+}"
   lynx "https://wiki.archlinux.org/index.php?search=${term}"
 }
+alias archwiki="_func_archwiki"
 
 # Display cheatsheets using https://cheat.sh
-cheat () {
+_func_cheat () {
   local term="${*}"
   term="${term// /+}"
   curl "cheat.sh/${term}"
 }
+alias cheat="_func_cheat"
 
 # List files by size. Usage: dusort dir/*
-dusort () { du -sh "$@" | sort -sh; }
+_func_dusort () { du -sh "$@" | sort -sh; }
+alias dusort='_func_dusort'
+
+# Open a given dir or file's location in Forklift (https://binarynights.com)
+_func_forklift () { open "$1" -a "Forklift"; }
+alias forklift="_func_forklift"
 
 # Generate a gitignore file using https://www.toptal.com/developers/gitignore
-generategitignore () {
+_func_generategitignore () {
   local langs="${*}"
   local tmpfile
-  tmpfile=$(mktemp /tmp/generategitignore.XXXXXX)
+  tmpfile=$(mktemp /tmp/ggi.XXXXXX)
   langs="${langs// /,}"
   curl -sL "https://www.toptal.com/developers/gitignore/api/$langs" > "$tmpfile"
   cp -i "$tmpfile" .gitignore
   rm "$tmpfile"
 }
+alias generategitignore="_func_generategitignore"
 
 # Create a dir and move into it
-mkcd () { mkdir "$1" && cd "$1" || exit; }
+_func_mkcd () { mkdir "$1" && cd "$1" || exit; }
+alias mkcd="_func_mkcd"
 
 # Open a dir in a new tab
-newtab () { open "$@" -a "iterm"; }
+_func_newtab () { open "$@" -a "iterm"; }
+alias newtab="_func_newtab"
 
 # Upgrade to the latest version of Chromedriver
-upgradechromedriver () { 
+_func_upgradechromedriver () {
   wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/"$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)"/chromedriver_mac64.zip \
     && unzip /tmp/chromedriver.zip chromedriver -d ~/bin \
     && rm /tmp/chromedriver.zip
 }
+alias upgradechromedriver="_func_upgradechromedriver"
