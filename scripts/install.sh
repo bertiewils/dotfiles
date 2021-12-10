@@ -43,9 +43,9 @@ else
   BACKUP_DIR=~/.dotfiles-backup
   mkdir -p $BACKUP_DIR
   $ALIAS checkout 2>&1 \
-    | grep -E "\s+\." \
+    | grep -P '\t' \
     | awk '{ print $1 }' \
-    | xargs -I{} mv {} .dotfiles-backup/{}
+    | xargs -I {} mv {} $BACKUP_DIR/{}
   $ALIAS checkout && info "Checked out dotfiles"
 fi
 
