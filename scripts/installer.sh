@@ -5,7 +5,7 @@
 
 # CHANGE THESE as needed
 ALIAS=dotfiles
-REPO_URL=https://github.com/bertiewils/dotfiles.git
+REPO_URL=git@github.com:bertiewils/dotfiles.git
 
 # CHANGE THIS to your chosen alias
 dotfiles () {
