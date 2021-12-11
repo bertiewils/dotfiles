@@ -16,7 +16,7 @@ curl -L https://git.io/bwdotfiles | sh
 
 
 
-s
+
 ---
 
 ---
