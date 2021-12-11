@@ -6,7 +6,7 @@ Handled using a [bare Git repository](https://www.atlassian.com/git/tutorials/do
 ## Installation
 
 ```sh
-curl -L https://git.io/bwdotfiles | sh
+curl -L git.io/bwdotfiles | sh
 ```
 
 
