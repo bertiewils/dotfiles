@@ -54,6 +54,9 @@ fi
 
 $ALIAS config --local status.showUntrackedFiles no
 
+# Auto set the upstream
+$ALIAS push --set-upstream origin main
+
 if ! alias $ALIAS > /dev/null 2>&1; then
   warn "Remember to add the alias permenantly (in .bashrc etc.)"
 fi
