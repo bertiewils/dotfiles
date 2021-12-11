@@ -9,6 +9,9 @@ alias bashrc="nano ~/.bashrc && . ~/.bashrc"
 alias aliases="nano ~/.aliases && . ~/.aliases"
 alias functions="nano ~/.functions && . ~/.functions"
 
+# RICING
+alias xresapply="xrdb -merge ~/.Xresources"
+
 # NAVIGATION
 alias path="pwd"
 alias ..="cd .."
