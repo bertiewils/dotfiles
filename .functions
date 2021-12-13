@@ -39,6 +39,28 @@ _func_generategitignore () {
 }
 alias generategitignore="_func_generategitignore"
 
+# Open the git remote URL in the default browser
+_func_gitremoteopen () {
+  # Determine method to open browser
+  local open
+  if [[ $(uname) == "Darwin"* ]]; then
+    open=open
+  else
+    open=xdg-open
+  fi
+  if git config --get remote.origin.url | grep -q "@"; then
+    # for SSH cloned repos
+    $open "$(git config --get remote.origin.url \
+      | awk -F "@" '{print $2}' \
+      | sed 's/:/\//g' \
+      | awk '{print "https://"$1}')"
+  else
+    # for HTTPS cloned repos
+    $open "$(git config --get remote.origin.url)"
+  fi
+}
+alias gitremoteopen="_func_gitremoteopen"
+
 # Create a dir and move into it
 _func_mkcd () { mkdir "$1" && cd "$1" || exit; }
 alias mkcd="_func_mkcd"
