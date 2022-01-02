@@ -16,12 +16,38 @@ _func_cheat () {
   local term="${*}"
   term="${term// /+}"
   curl "cheat.sh/${term}"
+  # display any matching personal cheatsheets
+  [ -f ~/cheatsheets/"$term" ] && cat ~/cheatsheets/"$term"
 }
 alias cheat="_func_cheat"
 
 # List files by size. Usage: dusort dir/*
 _func_dusort () { du -sh "$@" | sort -sh; }
 alias dusort='_func_dusort'
+
+# Extract files, as suggested in Mendel Cooper's "Advanced Bash Scripting Guide"
+_func_extract () {
+   if [ -f "$1" ] ; then
+       case $1 in
+        *.tar.bz2)      tar xvjf "$1" ;;
+        *.tar.gz)       tar xvzf "$1" ;;
+        *.tar.xz)       tar Jxvf "$1" ;;
+        *.bz2)          bunzip2 "$1" ;;
+        *.rar)          unrar x "$1" ;;
+        *.gz)           gunzip "$1" ;;
+        *.tar)          tar xvf "$1" ;;
+        *.tbz2)         tar xvjf "$1" ;;
+        *.tgz)          tar xvzf "$1" ;;
+        *.zip)          unzip "$1" ;;
+        *.Z)            uncompress "$1" ;;
+        *.7z)           7z x "$1" ;;
+        *)              echo "don't know how to extract '$1'..." ;;
+       esac
+   else
+       echo "'$1' is not a valid file!"
+   fi
+}
+alias extract="_func_extract"
 
 # Open a given dir or file's location in Forklift (https://binarynights.com)
 _func_forklift () { open "$1" -a "Forklift"; }
@@ -31,7 +57,7 @@ alias forklift="_func_forklift"
 _func_generategitignore () {
   local langs="${*}"
   local tmpfile
-  tmpfile=$(mktemp /tmp/ggi.XXXXXX)
+  tmpfile=$(mktemp)
   langs="${langs// /,}"
   curl -sL "https://www.toptal.com/developers/gitignore/api/$langs" > "$tmpfile"
   cp -i "$tmpfile" .gitignore
@@ -43,11 +69,7 @@ alias generategitignore="_func_generategitignore"
 _func_gitremoteopen () {
   # Determine method to open browser
   local open
-  if [[ $(uname) == "Darwin"* ]]; then
-    open=open
-  else
-    open=xdg-open
-  fi
+  [[ $(uname) == "Darwin"* ]] && open=open || open=xdg-open
   if git config --get remote.origin.url | grep -q "@"; then
     # for SSH cloned repos
     $open "$(git config --get remote.origin.url \

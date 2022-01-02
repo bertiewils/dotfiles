@@ -12,6 +12,10 @@ dotfiles () {
    /usr/bin/git --git-dir="$HOME"/.dotfiles/ --work-tree="$HOME" "$@"
 }
 
+# Set colours
+NC='\033[0m'  # No colour
+YELLOW='\033[1;33m'
+
 info () {
   # shellcheck disable=SC2059  # for clarity instead of format specifiers
   printf "INFO - $*\n"
