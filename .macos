@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+#
+# Set MacOS specific options
+
+# Show User Library
+chflags nohidden ~/Library/
+
+# Add Quit option to Finder
+defaults write com.apple.finder QuitMenuItem -bool true && killall Finder
+
+# Set the icon size of Dock items
+defaults write com.apple.dock tilesize -int 30 && killall Dock
+
+# Reduce Transparency
+sudo defaults write com.apple.universalaccess reduceTransparency -bool true
+
+# Disable Sudden Motion Sensor
+sudo pmset -a sms 0
+
+
+##################
+# 3rd Party Apps
+##################
+
+# Forklift 3 - https://binarynights.com
+
+# Set ForkLift as default file viewer instead of Finder
+defaults write -g NSFileViewer -string com.binarynights.ForkLift-3
+defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.binarynights.ForkLift-3";}'
+
+# iTerm2 - https://iterm2.com/
+
+
