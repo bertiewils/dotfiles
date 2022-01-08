@@ -66,3 +66,5 @@ if ! alias $ALIAS > /dev/null 2>&1; then
 fi
 
 cd - > /dev/null || exit
+
+# TODO: Prompt to add crontab to auto-update

@@ -30,4 +30,4 @@ defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandle
 
 # iTerm2 - https://iterm2.com/
 
-
+# TODO: set iTerm preferences location to ~/.config using defaults
