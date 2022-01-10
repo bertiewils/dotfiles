@@ -30,4 +30,6 @@ defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandle
 
 # iTerm2 - https://iterm2.com/
 
-# TODO: set iTerm preferences location to ~/.config using defaults
+# Set iTerm preferences location
+defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "/Users/bert/.config"
+defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
