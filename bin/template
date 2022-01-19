@@ -22,7 +22,8 @@ usage() {
   script_name=$(basename "$0")
   cat <<EOF
 
-Usage: $script_name [ language ] [ file ]
+Usage:
+  $script_name [ language ] [ file path ]
 
 e.g. $script_name bash new-script.sh
 
