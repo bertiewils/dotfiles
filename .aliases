@@ -51,6 +51,7 @@ alias mv="mv -i"
 alias grep="grep --color=auto"
 alias htop="bpytop"
 alias vscode="code"
+alias tf="terraform"
 alias qrencode="qrencode -t ansiutf8"
 alias diff='colordiff -yW"$(tput cols)"'
 alias webserver="open 'http://localhost:8000'; python3 -m http.server"

@@ -11,3 +11,4 @@ source ~/.bashrc
 
 export PATH="/usr/local/opt/python@3.7/bin:$PATH"
 export PATH="/usr/local/opt/python@3.7:$PATH"
+export HOMEBREW_NO_ENV_HINTS=1
