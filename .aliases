@@ -36,6 +36,7 @@ alias gd="git diff"
 alias gb="git branch"
 alias gm="git checkout main"
 alias gc="git commit -m"
+alias githi="git log --all --graph --decorate --oneline --color"
 
 # DOCKER
 alias d="docker"
@@ -56,6 +57,7 @@ alias tf="terraform"
 alias qrencode="qrencode -t ansiutf8"
 alias diff='colordiff -yW"$(tput cols)"'
 alias webserver="open 'http://localhost:8000'; python3 -m http.server"
+alias eol="uv tool run --from norwegianblue eol"
 
 # MISC
 alias weather='curl wttr.in/$(curl -s https://ipinfo.io/city)'
