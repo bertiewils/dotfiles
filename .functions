@@ -91,6 +91,21 @@ alias mkcd="_func_mkcd"
 _func_newtab () { open "$@" -a "iterm"; }
 alias newtab="_func_newtab"
 
+# Easily navigate to project directories
+function _func_proj() {
+    # Define your project directories
+    local project_dirs=(
+        ~/projects
+    )
+
+    local selected=$(find "${project_dirs[@]}" -maxdepth 1 -type d | fzf)
+
+    if [[ -n "$selected" ]]; then
+        cd "$selected"
+    fi
+}
+alias proj="_func_proj"
+
 # Upgrade to the latest version of Chromedriver
 _func_upgradechromedriver () {
   wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/"$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)"/chromedriver_mac64.zip \
